@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayuda - UDD+Accesible</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6a0dad, #c39bd3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .chat-container {
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      border-radius: 20px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      max-height: 80vh;
+      justify-content: space-between;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centra los mensajes verticalmente si hay pocos */
+      align-items: center;    /* Centra horizontalmente */
+    }
+
+    .message {
+      background: #fff;
+      color: #6a0dad;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    #message-input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    #send-button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      background: #4ade80;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #send-button:hover {
+      background: #22c55e;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h1>Chat de Ayuda</h1>
+    <div id="chat-box">
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="message-input" placeholder="Escribe tu mensaje...">
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (text === '') return;
+      
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message');
+      msgDiv.textContent = text;
+      chatBox.appendChild(msgDiv);
+
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight; // auto-scroll
+    }
+
+    sendButton.addEventListener('click', sendMessage);
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
+

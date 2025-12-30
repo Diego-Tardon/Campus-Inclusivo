@@ -1,0 +1,132 @@
+/* Reset básico */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a0dad, #c39bd3);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Permite que el footer se quede abajo */
+  animation: fadeInBody 1s ease;
+}
+
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 50px 20px 30px;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+/* Contenedor de tarjetas */
+.cards-container {
+  display: flex;
+  gap: 20px;                /* Espacio entre tarjetas */
+  padding: 60px 80px;       /* Más espacio arriba/abajo y a los lados */
+  overflow-x: auto;          /* Scroll horizontal si no caben todas */
+  scroll-behavior: smooth;   /* Animación suave al hacer scroll */
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+}
+
+.cards-container::-webkit-scrollbar {
+  height: 8px;               /* Altura de la barra de scroll */
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background-color: rgba(106,13,173,0.5);
+  border-radius: 4px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Tarjetas */
+.card {
+  flex: 0 0 260px;           /* Ancho fijo */
+  height: 300px;             /* Altura fija para todas las tarjetas */
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px 15px;        /* Ajuste de padding */
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* Centra verticalmente todo el contenido */
+  align-items: center;        /* Centra horizontalmente todo el contenido */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Títulos y textos centrados */
+.card h2, .card p {
+  margin: 8px 0;              /* Espacio uniforme */
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Evita que el texto largo desborde */
+.card p {
+  flex: none;                 /* No ocupa espacio extra */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover de tarjetas */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 35px rgba(0,0,0,0.2);
+}
+
+/* Botones minimalistas */
+.card button {
+  padding: 10px 20px;          
+  border: 2px solid #6a0dad;   
+  border-radius: 12px;         
+  background: transparent;      
+  color: #6a0dad;              
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card button:hover {
+  background: #6a0dad;         
+  color: #fff;                 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 12px rgba(106,13,173,0.2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 { font-size: 2rem; }
+  header p { font-size: 1rem; }
+  .card h2 { font-size: 1.4rem; }
+  .card p { font-size: 0.95rem; }
+  footer .footer-content {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+}
+
+
+
+
+

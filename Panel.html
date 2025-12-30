@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Administrativo - UDD+Accesible</title>
+<style>
+    /* Reset básico */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6a0dad, #c39bd3);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    animation: fadeInBody 1s ease;
+    }
+
+    @keyframes fadeInBody {
+    from { opacity: 0; }
+    to { opacity: 1; }
+    }
+
+    header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    }
+
+    header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    }
+
+    header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    }
+
+    main {
+    flex: 1;
+    }
+
+    .panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    }
+
+    .panel-card {
+    background: #fff;
+    color: #333;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .panel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.2);
+    }
+
+    .reporte-admin {
+    background: rgba(106,13,173,0.1);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: border-left 0.3s ease;
+    }
+
+    .actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+    }
+
+    .actions .estado-btn, #export-btn {
+    flex: 1;
+    padding: 5px;
+    border-radius: 20px;
+    border: none;
+    background: #6a0dad;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    }
+
+    .actions .estado-btn:hover, #export-btn:hover {
+    background: #8e24aa;
+    }
+
+</style>
+</head>
+<body>
+<header>
+    <h1>Panel Administrativo</h1>
+    <p>Prioriza, asigna tareas y exporta reportes</p>
+</header>
+
+<main>
+    <div class="panel-container">
+    
+    <!-- Reportes -->
+    <section class="panel-card">
+        <h2>Reportes</h2>
+        <div id="reportes-list">
+        <div class="reporte-admin">
+            <p><strong>Juan Pérez</strong> (Física): Rampa rota entrada principal.</p>
+            <div class="actions">
+            <button class="estado-btn" data-estado="En revisión">En revisión</button>
+            <button class="estado-btn" data-estado="En proceso">En proceso</button>
+            <button class="estado-btn" data-estado="Resuelto">Resuelto</button>
+            </div>
+        </div>
+        <div class="reporte-admin">
+            <p><strong>María López</strong> (Comunicación): Señalización incompleta edificio B.</p>
+            <div class="actions">
+            <button class="estado-btn" data-estado="En revisión">En revisión</button>
+            <button class="estado-btn" data-estado="En proceso">En proceso</button>
+            <button class="estado-btn" data-estado="Resuelto">Resuelto</button>
+            </div>
+        </div>
+        </div>
+        <button id="export-btn">Exportar reportes</button>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="panel-card">
+        <h2>Estadísticas</h2>
+        <p>Total reportes: <span id="total-reportes">2</span></p>
+        <p>En revisión: <span id="en-revision">0</span></p>
+        <p>En proceso: <span id="en-proceso">0</span></p>
+        <p>Resueltos: <span id="resueltos">0</span></p>
+    </section>
+
+    </div>
+</main>
+<script>
+    const botonesEstado = document.querySelectorAll('.estado-btn');
+    const reportes = document.querySelectorAll('.reporte-admin');
+    const total = document.getElementById('total-reportes');
+    const enRevision = document.getElementById('en-revision');
+    const enProceso = document.getElementById('en-proceso');
+    const resueltos = document.getElementById('resueltos');
+    const exportBtn = document.getElementById('export-btn');
+
+    function actualizarEstadisticas() {
+    let rev = 0, proc = 0, res = 0;
+    reportes.forEach(r => {
+        const estado = r.dataset.estado || "En revisión";
+        if(estado === "En revisión") rev++;
+        else if(estado === "En proceso") proc++;
+        else if(estado === "Resuelto") res++;
+    });
+    total.textContent = reportes.length;
+    enRevision.textContent = rev;
+    enProceso.textContent = proc;
+    resueltos.textContent = res;
+    }
+
+    botonesEstado.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const reporte = btn.closest('.reporte-admin');
+        reporte.dataset.estado = btn.dataset.estado;
+        // Color visual según estado
+        if(btn.dataset.estado === "En revisión") reporte.style.borderLeft = "5px solid #6a0dad";
+        else if(btn.dataset.estado === "En proceso") reporte.style.borderLeft = "5px solid #f59e0b";
+        else if(btn.dataset.estado === "Resuelto") reporte.style.borderLeft = "5px solid #22c55e";
+        actualizarEstadisticas();
+    });
+    });
+
+    exportBtn.addEventListener('click', () => {
+    let data = [];
+    reportes.forEach(r => {
+        const texto = r.querySelector('p').innerText;
+        const estado = r.dataset.estado || "En revisión";
+        data.push(`${texto} | Estado: ${estado}`);
+    });
+    const blob = new Blob([data.join("\n")], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = "reportes.txt";
+    link.click();
+    });
+
+    actualizarEstadisticas();
+</script>
+</body>
+</html>

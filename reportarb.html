@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportar Barreras - UDD+Accesible</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6a0dad, #c39bd3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    .report-container {
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      border-radius: 20px;
+      padding: 30px;
+      width: 450px;
+      max-width: 90%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      justify-content: center;  /* Centra verticalmente el contenido */
+      align-items: center;      /* Centra horizontalmente */
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      align-items: center;
+    }
+
+    input, textarea, select {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    #submit-button {
+      padding: 12px;
+      border-radius: 50px;
+      border: none;
+      background: #6a0dad;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 50%;
+      align-self: center;
+    }
+
+    #submit-button:hover {
+      background: #8e2cd7;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(106,13,173,0.2);
+    }
+
+    #reportes {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+      width: 100%;
+      text-align: left;
+    }
+
+    .reporte {
+      background: #fff;
+      color: #6a0dad;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      word-wrap: break-word;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #ddd;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .report-container {
+        width: 90%;
+      }
+      #submit-button {
+        width: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-container">
+    <h1>Reportar Barreras</h1>
+
+    <form id="report-form">
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <select id="tipo" required>
+        <option value="" disabled selected>Tipo de barrera</option>
+        <option value="Fisica">Física</option>
+        <option value="Tecnologica">Tecnológica</option>
+        <option value="Comunicación">Comunicación</option>
+        <option value="Otra">Otra</option>
+      </select>
+      <textarea id="descripcion" rows="4" placeholder="Descripción de la barrera" required></textarea>
+      <button type="submit" id="submit-button">Enviar Reporte</button>
+    </form>
+
+    <h3>Reportes enviados</h3>
+    <div id="reportes">
+      <!-- Los reportes aparecerán aquí -->
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('report-form');
+    const reportesDiv = document.getElementById('reportes');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const tipo = document.getElementById('tipo').value;
+      const descripcion = document.getElementById('descripcion').value.trim();
+
+      if(nombre && tipo && descripcion) {
+        const reporteDiv = document.createElement('div');
+        reporteDiv.classList.add('reporte');
+        reporteDiv.innerHTML = `<strong>${nombre}</strong> (${tipo}): ${descripcion}`;
+        reportesDiv.appendChild(reporteDiv);
+
+        form.reset();
+        reportesDiv.scrollTop = reportesDiv.scrollHeight; 
+      }
+    });
+  </script>
+</body>
+</html>

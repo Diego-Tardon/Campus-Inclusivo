@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mapa de Barreras - UDD+Accesible</title>
+<style>
+    body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6a0dad, #c39bd3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    padding: 20px;
+    }
+
+    .map-container {
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    padding: 30px;
+    width: 500px;
+    max-width: 95%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    }
+
+    h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    p {
+    font-size: 1.1rem;
+    color: #f0e6ff;
+    margin-bottom: 20px;
+    text-align: center;
+    }
+
+    .map-placeholder {
+    width: 100%;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+</style>
+</head>
+<body>
+<div class="map-container">
+    <h1>Mapa de Barreras</h1>
+    <p>Visualiza barreras en el campus por tipo, fecha o estado.</p>
+
+    <div class="map-placeholder">
+    Aquí se mostrará el mapa
+    </div>
+</div>
+</body>
+</html>
