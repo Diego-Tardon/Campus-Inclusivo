@@ -112,7 +112,6 @@
       text-align: center;
     }
 
-    /* Responsive */
     @media (max-width: 500px) {
       #send-button {
         width: 70%;
@@ -136,7 +135,6 @@
 
     <h3>Mensajes enviados</h3>
     <div id="messages">
-      <!-- Mensajes aparecerán aquí -->
     </div>
   </div>
 
@@ -158,7 +156,7 @@
         messagesDiv.appendChild(messageDiv);
 
         form.reset();
-        messagesDiv.scrollTop = messagesDiv.scrollHeight; // auto-scroll
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; 
       }
     });
   </script>
