@@ -43,8 +43,8 @@
       margin-bottom: 15px;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* Centra los mensajes verticalmente si hay pocos */
-      align-items: center;    /* Centra horizontalmente */
+      justify-content: center; 
+      align-items: center;    
     }
 
     .message {
@@ -115,7 +115,7 @@
       chatBox.appendChild(msgDiv);
 
       input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight; // auto-scroll
+      chatBox.scrollTop = chatBox.scrollHeight; 
     }
 
     sendButton.addEventListener('click', sendMessage);
