@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panel Administrativo - UDD+Accesible</title>
 <style>
-    /* Reset básico */
     * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
@@ -109,7 +108,6 @@
 <main>
     <div class="panel-container">
     
-    <!-- Reportes -->
     <section class="panel-card">
         <h2>Reportes</h2>
         <div id="reportes-list">
@@ -132,8 +130,7 @@
         </div>
         <button id="export-btn">Exportar reportes</button>
     </section>
-
-    <!-- Estadísticas -->
+        
     <section class="panel-card">
         <h2>Estadísticas</h2>
         <p>Total reportes: <span id="total-reportes">2</span></p>
@@ -171,7 +168,6 @@
     btn.addEventListener('click', () => {
         const reporte = btn.closest('.reporte-admin');
         reporte.dataset.estado = btn.dataset.estado;
-        // Color visual según estado
         if(btn.dataset.estado === "En revisión") reporte.style.borderLeft = "5px solid #6a0dad";
         else if(btn.dataset.estado === "En proceso") reporte.style.borderLeft = "5px solid #f59e0b";
         else if(btn.dataset.estado === "Resuelto") reporte.style.borderLeft = "5px solid #22c55e";
